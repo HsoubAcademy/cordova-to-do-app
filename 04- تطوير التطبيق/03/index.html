@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- Path to Framework7 Library CSS, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <!-- Path to Framework7 color related styles, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <!-- Path to Framework7 RTL -->
+    <link rel="stylesheet" href="css/framework7.material.rtl.min.css">
+    <!-- Path to Framework7 Icons -->
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>TODOLIST</title>
+</head>
+
+<body>
+
+    <div class="views">
+        <!-- View -->
+        <div class="view view-main">
+            <!-- الترويسة -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="right">
+                        <a href="#" data-panel="right" class="open-panel">
+                            <img class="menu_icon" src="img/sidemenu_icon.png" />
+                        </a>
+                    </div>
+                    <div id="navTitle" class="center">مهامي</div>
+                </div>
+            </div>
+
+            <!-- القائمة الجانبية -->
+            <div class="panel panel-right panel-cover">
+                <div class="content-block">
+                    <h2 class="sidemenu-title">القائمة الرئيسية</h2>
+                    <div class="list-block">
+                        <ul>
+                            <li class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">home</i></div>
+                                <div class="item-inner">
+                                    <a href="#index">
+                                        <div class="item-title">الصفحة الرئيسية</div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">add_round</i></div>
+                                <div class="item-inner">
+                                    <a href="#addTask">
+                                        <div class="item-title">إضافة مهمة</div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-media"><i class="icon f7-icons">sort</i></div>
+                                <div class="item-inner">
+                                    <a href="#category">
+                                        <div class="item-title">التصنيفات</div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الصفحات -->
+            <div class="pages">
+                <!-- الصفحة الرئيسية -->
+                <div class="page" data-page="index">
+                    <div class="page-content">
+                        <!-- قائمة المهام  -->
+                        <div class="list-block sortable">
+                            <ul id="allTasks">
+                            </ul>
+                        </div>
+                        <!-- إضافة مهمة -->
+                        <a href="#addTask">
+                            <img id="addNewTask" src="img/add_task.png" />
+                        </a>
+                    </div>
+                </div>
+
+                <!-- صفحة إضافة وتعديل مهمة  -->
+                <div class="page cached" data-page="task">
+                    <div class="page-content">
+                        <div class="content-block-title" id="taskSubTitle">المهمة الجديدة</div>
+                        <div class="list-block">
+                            <ul>
+                                <!-- عنوان المهمة -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">data</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">عنوان المهمة</div>
+                                            <div class="item-input">
+                                                <input id="taskTitle" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- وصف المهمة -->
+                                <li class="align-top">
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">chat</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">نص المهمة</div>
+                                            <div class="item-input">
+                                                <textarea id="taskDescription"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- التاريخ -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">calendar</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">تاريخ المهمة</div>
+                                            <div class="item-input">
+                                                <input id="taskDate" type="date" placeholder="" value="2017-01-01">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- الوقت -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">time</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">وقت المهمة</div>
+                                            <div class="item-input">
+                                                <input id="minutesInput" type="number" value="59">
+                                            </div>
+                                            <div class="item-input">
+                                                <input id="hoursInput" type="number" value="23">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- تكرار المهمة -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">redo</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">تكرار المهمة</div>
+                                            <div class="item-input">
+                                                <select id="taskRepetition">
+                            <option>يومياً</option>
+                            <option>أسبوعياً</option>
+                            <option>شهرياً</option>
+                        </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- تصنيف المهمة -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">sort</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">تصنيف المهمة</div>
+                                            <div class="item-input">
+                                                <select id="taskCategoryId">
+                                                    <option value="1">تسوق</option>
+                                                    <option value="2">عمل</option>
+                                                    <option value="3">عائلة</option>
+                                                    <option value="4">غير ذلك</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- أولوية المهمة -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">star_half</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">أولوية المهمة</div>
+                                            <div class="item-input">
+                                                <select id="taskPriority">
+                                                    <option value="1">أولوية 1</option>
+                                                    <option value="2">أولوية 2</option>
+                                                    <option value="3">أولوية 3</option>
+                                                    <option value="4">أولوية 4</option>
+                                                    <option value="5">أولوية 5</option>
+                        </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- أضف المهمة -->
+                                <li>
+                                    <p><a id="taskButton" href="#" class="button button-fill color-blue button-round">أضف المهمة</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- صفحة التصنيفات -->
+                <div class="page cached" data-page="category">
+                    <div class="page-content">
+                        <!-- قائمة التصنيفات  -->
+                        <div class="list-block sortable">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media category_arrow"><i class="icon f7-icons">arrow_left</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title">Item 1</div>
+                                            <div class="item-after delete_category"><i class="icon f7-icons">delete_round</i></div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media category_arrow"><i class="icon f7-icons">arrow_left</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title">Item 2</div>
+                                            <div class="item-after delete_category"><i class="icon f7-icons">delete_round</i></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#" class="prompt-title-ok-cancel">
+                            <img id="addNewCategory" src="img/add_task.png" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Framework7 مكتبة جافاسكريبت لإطار العمل -->
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+</body>
+
+</html>

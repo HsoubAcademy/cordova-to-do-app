@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title>ToDoList</title>
+    <!-- Path to Framework7 Library CSS, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <!-- Path to Framework7 color related styles, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <!-- Path to Framework7 RTL Library CSS, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.rtl.min.css">
+    <!-- Path to Framework7 Icon Library CSS, Material Theme -->
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="views">
+        <!-- View -->
+        <div class="view view-main">
+
+            <!-- Navbar -->
+            <div class="navbar">
+                <!-- Home page navbar -->
+                <div class="navbar-inner" data-page="index">
+                    <div class="right"><img style="height: 30px; width: 30px;" src="img/sidemenu_icon.png" /></div>
+                    <div id="navTitle" class="center">مهامي</div>
+                </div>
+            </div>
+
+            <!-- Pages -->
+            <div class="pages">
+                <!-- Home page -->
+                <div class="page" data-page="index">
+                    <div class="page-content">
+
+                        <!-- Sortable list  -->
+                        <div class="list-block sortable">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><img style="height: 30px; width: 30px" src="img/task.png" /></div>
+                                        <div class="item-inner">
+                                            <div class="item-title">Item 1</div>
+                                            <div class="item-after">$10</div>
+                                        </div>
+                                    </div>
+                                    <!-- Sortable handler  -->
+                                    <div class="sortable-handler"></div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><img style="height: 30px; width: 30px" src="img/task.png" /></div>
+                                        <div class="item-inner">
+                                            <div class="item-title">Item 2</div>
+                                            <div class="item-after">$20</div>
+                                        </div>
+                                    </div>
+                                    <div class="sortable-handler"></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#addTask"><img id="addNewTask" src="img/add_task.png" /></a>
+                    </div>
+                </div>
+
+                <!-- Add New Task page -->
+                <div class="page cached" data-page="addTask">
+                    <div class="page-content">
+                        <div class="content-block-title">المهمة الجديدة</div>
+                        <div class="list-block">
+                            <ul>
+                                <!-- Text inputs -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">data</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">عنوان المهمة:</div>
+                                            <div class="item-input">
+                                                <input type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Textarea inputs -->
+                                <li class="align-top">
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">chat</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">نص المهمة</div>
+                                            <div class="item-input">
+                                                <textarea></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!-- Select inputs -->
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">redo</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">تكرار المهمة</div>
+                                            <div class="item-input">
+                                                <select>
+                                                    <option>يومياً</option>
+                                                    <option>أسبوعياً</option>
+                                                    <option>شهرياً</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">sort</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">تصنيف المهمة</div>
+                                            <div class="item-input">
+                                                <select>
+                                                    <option>تسوق</option>
+                                                    <option>عمل</option>
+                                                    <option>عائلة</option>
+                                                    <option>غير ذلك</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><i class="icon f7-icons">sort</i></div>
+                                        <div class="item-inner">
+                                            <div class="item-title label">أولوية المهمة</div>
+                                            <div class="item-input">
+                                                <select>
+                                                    <option>أولوية 1</option>
+                                                    <option>أولوية 2</option>
+                                                    <option>أولوية 3</option>
+                                                    <option>أولوية 4</option>
+                                                    <option>أولوية 5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p><a href="#" class="button button-fill color-blue button-round">أضف المهمة</a></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>

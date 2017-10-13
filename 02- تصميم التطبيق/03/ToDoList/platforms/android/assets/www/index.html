@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title>ToDoList</title>
+    <!-- Path to Framework7 Library CSS, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <!-- Path to Framework7 color related styles, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="views">
+        <!-- View -->
+        <div class="view view-main">
+
+            <!-- Navbar -->
+            <div class="navbar">
+                <!-- Home page navbar -->
+                <div class="navbar-inner" data-page="index">
+                    <div id="navTitle" class="center">Home</div>
+                </div>
+            </div>
+
+            <!-- Pages -->
+            <div class="pages navbar-through">
+                <!-- Home page -->
+                <div class="page" data-page="index">
+                    <div class="page-content">
+                        <p>Home page</p>
+                        <a href="#about">Go to About page</a>
+                    </div>
+                </div>
+
+                <!-- About page -->
+                <div class="page cached navbar-through" data-page="about">
+                    <div class="page-content">
+                        <p>About page</p>
+                        <a href="#contact">Go to Contact page</a>
+                    </div>
+                </div>
+
+                <!-- Services page -->
+                <div class="page cached navbar-through" data-page="contact">
+                    <div class="page-content">
+                        <p>Contact page</p>
+                        <a href="#index"> Go back to home page </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/index.js"></script>
+
+</body>
+
+</html>

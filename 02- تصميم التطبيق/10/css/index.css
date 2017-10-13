@@ -1,0 +1,19 @@
+.task_icon,
+.menu_icon {
+    height: 30px;
+    width: 30px;
+}
+
+#addNewTask {
+    height: 40px;
+    width: 40px;
+    position: fixed;
+    bottom: 11%;
+    right: 20px;
+    -webkit-filter: drop-shadow(0px 0px 4px grey);
+    filter: drop-shadow(0px 0px 4px grey);
+}
+
+.label {
+    color: #da3623 !important
+}

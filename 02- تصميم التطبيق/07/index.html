@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <!-- Path to Framework7 Library CSS, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <!-- Path to Framework7 color related styles, Material Theme -->
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <!-- Path to Framework7 RTL -->
+    <link rel="stylesheet" href="css/framework7.material.rtl.min.css">
+
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>TODOLIST</title>
+</head>
+
+<body>
+
+    <div class="views">
+        <!-- View -->
+        <div class="view view-main">
+            <!-- الترويسة -->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="right">
+                        <img class="menu_icon" src="img/sidemenu_icon.png" />
+                    </div>
+                    <div id="navTitle" class="center">مهامي</div>
+                </div>
+            </div>
+            <!-- الصفحات -->
+            <div class="pages">
+                <!-- الصفحة الرئيسية -->
+                <div class="page" data-page="index">
+                    <div class="page-content">
+                        <!-- قائمة المهام  -->
+                        <div class="list-block sortable">
+                            <ul>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><img class="task_icon" src="img/task.png" /></div>
+                                        <div class="item-inner">
+                                            <div class="item-title">Item 1</div>
+                                            <div class="item-after">$10</div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-content">
+                                        <div class="item-media"><img class="task_icon" src="img/task.png" /></div>
+                                        <div class="item-inner">
+                                            <div class="item-title">Item 2</div>
+                                            <div class="item-after">$20</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- إضافة مهمة -->
+                        <a href="#addTask">
+                            <img id="addNewTask" src="img/add_task.png" />
+                        </a>
+                    </div>
+                </div>
+
+                <!-- صفحة إضافة مهمة جديدة -->
+                <div class="page cached" data-page="addTask">
+                    <div class="page-content">
+                        <p>هنا المحتوى</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Framework7 مكتبة جافاسكريبت لإطار العمل -->
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+</body>
+
+</html>
