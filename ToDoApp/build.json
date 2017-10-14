@@ -1,0 +1,11 @@
+{
+ "android": {
+     "release": {
+         "keystore":"my-release-key.keystore",
+         "storePassword":"123456qwertyASDFGH",
+         "alias":"riyad",
+         "password":"123456qwertyASDFGH",
+         "keystoreType":""
+       }
+   }
+}
