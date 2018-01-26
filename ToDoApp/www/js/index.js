@@ -11,9 +11,11 @@ var mainView = myApp.addView('.view-main', {
 myApp.onPageBeforeAnimation('index', function(page) {
     $$("#navTitle").html('مهامي');
     myApp.closePanel();
+    refreshMainPage();
 });
 
 myApp.onPageBeforeAnimation('task', function(page) {
+    myApp.closePanel();
     //جلب جميع التصنيفات
     db.transaction(function(tx) {
         tx.executeSql('SELECT * FROM Category', [], function(tx, rs) {
@@ -54,17 +56,17 @@ myApp.onPageBeforeAnimation('task', function(page) {
             });
         });
     }
-    myApp.closePanel();
 });
 
 myApp.onPageBeforeAnimation('category', function(page) {
     $$("#navTitle").html('تصنيفات المهمة');
     myApp.closePanel();
+    $$("#allCategories").html("");
     //جلب جميع التصنيفات
     db.transaction(function(tx) {
         tx.executeSql('SELECT * FROM Category', [], function(tx, rs) {
             for (var i = 0; i < rs.rows.length; i++) {
-                var category = '<li class="category_item" id="' + rs.rows.item(i).category_id + '"><div class="item-content" ><div class="item-media category_arrow"><i class="icon f7-icons">arrow_left</i></div><div class="item-inner" >' + '<div class="item-title" id="category_name' + rs.rows.item(i).category_id + '">' + rs.rows.item(i).category_name + '</div>' + '<div class="item-after">' + '<i class="icon f7-icons delete_category">delete_round</i>' + '</div></div></div></li>';
+                var category = '<li class="category_item" id="cat' + rs.rows.item(i).category_id + '"><div class="item-content" ><div class="item-media category_arrow"><i class="icon f7-icons">arrow_left</i></div><div class="item-inner" >' + '<div class="item-title" id="category_name' + rs.rows.item(i).category_id + '">' + rs.rows.item(i).category_name + '</div>' + '<div class="item-after">' + '<i class="icon f7-icons delete_category">delete_round</i>' + '</div></div></div></li>';
                 $$("#allCategories").append(category);
             }
             setCategoryClickEvents();
@@ -141,6 +143,8 @@ $$('#taskButton').on('click', function(e) {
 function setClickEvent() {
     $$('.task_item').on('click', function(e) {
         task_id = $$(this).attr('id');
+        // var res = task_id.split("tas");
+        // task_id = res[1];
         isEditTask = true;
         if ($$(e.target).hasClass('delete_task')) {
             return;
@@ -150,14 +154,11 @@ function setClickEvent() {
     });
     //.delete_task صنف زر حذف المهمة
     $$('.delete_task').on('click', function(e) {
-        db.transaction(function(tx) {
-            tx.executeSql('DELETE FROM Task WHERE task_id = ?', [task_id], function(tx, rs) {
-                $$('#' + task_id).hide();
-                //حذف الإشعار
-                cordova.plugins.notification.local.clear(task_id, function() {});
-            }, function(tx, error) {
-                alert('Error: ' + error.message);
-            });
+        var q = 'DELETE FROM Task WHERE task_id = ' + task_id;
+        db.executeSql(q, [], function(resultSet) {
+            $$('#' + task_id).hide();
+        }, function(error) {
+            alert('UPDATE error: ' + error.message);
         });
     });
 
@@ -166,7 +167,10 @@ function setClickEvent() {
 function setCategoryClickEvents() {
     //حدث الضغط على التصنيف
     $$('.category_item').on('click', function(e) {
-        var category_id = $$(this).attr('id');
+        category_id = $$(this).attr('id');
+        var res = category_id.split("cat");
+        category_id = res[1];
+
         if ($$(e.target).hasClass('delete_category')) {
             return;
         }
@@ -186,7 +190,7 @@ function setCategoryClickEvents() {
         db.transaction(function(tx) {
             tx.executeSql('DELETE FROM Category WHERE category_id = ?', [category_id], function(tx, rs) {
                 alert("تم الحذف");
-                $$('#12313').hide();
+                $$('#cat' + category_id).hide();
             }, function(tx, error) {
                 alert('Error: ' + error.message);
             });
@@ -215,6 +219,23 @@ $$('.prompt-title-ok-cancel').on('click', function() {
     );
 });
 
+function refreshMainPage() {
+    db.transaction(function(tx) {
+        tx.executeSql('SELECT * FROM Task', [], function(tx, rs) {
+            $$("#allTasks").html("");
+            for (var i = 0; i < rs.rows.length; i++) {
+                var task = '<li class="task_item" id="' + rs.rows.item(i).task_id + '"><div class="item-content"><div class="item-media">' +
+                    '<img style="height: 30px; width: 30px" src="img/task.png" /></div>' + '<div class="item-inner"> <div class="item-title">' + rs.rows.item(i).task_name + '</div>' +
+                    '<div class="item-after">' + rs.rows.item(i).task_priority + '<i class="delete_task icon f7-icons">delete_round</i> </div>' + '</div></div></li>';
+                $$("#allTasks").append(task);
+            }
+            setClickEvent();
+        }, function(tx, error) {
+            alert('SELECT error: ' + error.message);
+        });
+    });
+}
+
 
 document.addEventListener('deviceready', function() {
     //إنشاء أو فتح قاعدة البيانات
@@ -225,8 +246,8 @@ document.addEventListener('deviceready', function() {
 
     db.transaction(function(tx) {
         //إنشاء الجداول إن لم تكن منشأة
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Category (category_id INT NOT NULL, category_name VARCHAR(50), PRIMARY KEY (category_id))');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Task (task_id INT NOT NULL, task_name VARCHAR(50), task_description VARCHAR(500), task_date DATE, task_time VARCHAR(50), task_repetition VARCHAR(50), task_priority VARCHAR(50), task_category_id INT, task_status VARCHAR(50), PRIMARY KEY (task_id), FOREIGN KEY (task_category_id) REFERENCES Category (category_id))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Category (category_id INTEGER PRIMARY KEY AUTOINCREMENT, category_name VARCHAR(50))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Task (task_id INTEGER PRIMARY KEY AUTOINCREMENT, task_name VARCHAR(50), task_description VARCHAR(500), task_date DATE, task_time VARCHAR(50), task_repetition VARCHAR(50), task_priority VARCHAR(50), task_category_id INT, task_status VARCHAR(50), FOREIGN KEY (task_category_id) REFERENCES Category (category_id))');
         //جلب جميع المهام
         tx.executeSql('SELECT * FROM Task', [], function(tx, rs) {
             $$("#allTasks").html("");
