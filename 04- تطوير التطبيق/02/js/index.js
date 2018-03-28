@@ -12,6 +12,7 @@ myApp.onPageBeforeAnimation('index', function(page) {
 myApp.onPageBeforeAnimation('addTask', function(page) {
     $$("#navTitle").html('أضف مهمة');
     myApp.closePanel();
+    refreshMainPage();
 });
 
 myApp.onPageBeforeAnimation('category', function(page) {
@@ -62,6 +63,22 @@ $$('.prompt-title-ok-cancel').on('click', function() {
     );
 });
 
+function refreshMainPage() {
+    db.transaction(function(tx) {
+        tx.executeSql('SELECT * FROM Task', [], function(tx, rs) {
+            $$("#allTasks").html("");
+            for (var i = 0; i < rs.rows.length; i++) {
+                var task = '<li class="task_item" id="' + rs.rows.item(i).task_id + '"><div class="item-content"><div class="item-media">' +
+                    '<img style="height: 30px; width: 30px" src="img/task.png" /></div>' + '<div class="item-inner"> <div class="item-title">' + rs.rows.item(i).task_name + '</div>' +
+                    '<div class="item-after">' + rs.rows.item(i).task_priority + '<i class="delete_task icon f7-icons">delete_round</i> </div>' + '</div></div></li>';
+                $$("#allTasks").append(task);
+            }
+            setClickEvent();
+        }, function(tx, error) {
+            alert('SELECT error: ' + error.message);
+        });
+    });
+}
 
 document.addEventListener('deviceready', function() {
     //إنشاء أو فتح قاعدة البيانات
