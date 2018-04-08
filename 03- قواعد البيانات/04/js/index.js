@@ -49,9 +49,9 @@ document.addEventListener('deviceready', function() {
         location: 'default'
     });
     db.transaction(function(tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Category (category_id INT NOT NULL, category_name VARCHAR(50), PRIMARY KEY (category_id))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Category (category_id INTEGER PRIMARY KEY AUTOINCREMENT, category_name VARCHAR(50))');
 
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Task (task_id INT NOT NULL, task_name VARCHAR(50), task_description VARCHAR(500), task_date DATE, task_time VARCHAR(50), task_repetition VARCHAR(50), task_priority VARCHAR(50), task_category_id INT, task_status VARCHAR(50), PRIMARY KEY (task_id), FOREIGN KEY (task_category_id) REFERENCES Category (category_id))');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Task (task_id INTEGER PRIMARY KEY AUTOINCREMENT, task_name VARCHAR(50), task_description VARCHAR(500), task_date DATE, task_time VARCHAR(50), task_repetition VARCHAR(50), task_priority VARCHAR(50), task_category_id INT, task_status VARCHAR(50), FOREIGN KEY (task_category_id) REFERENCES Category (category_id))');
 
     }, function(error) {
         alert('Transaction ERROR: ' + error.message);
